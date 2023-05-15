@@ -1,18 +1,13 @@
 import openai
-from flask import Flask, request, render_template
-
-app = Flask(__name__)
 
 # Set up your OpenAI API credentials
-openai.api_key = "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"
+openai.api_key = "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"
 
 # Read the story from the text file
 with open("story.txt", "r") as file:
     story = file.read()
 
-# Define a function to generate responses
 def generate_response(prompt):
-    response = ""
     # Use GPT-3 to generate response based on input prompt
     response = openai.Completion.create(
       engine="text-davinci-002",
@@ -22,20 +17,15 @@ def generate_response(prompt):
       stop=None,
       temperature=0.7
     )
-    return response.choices[0].text.strip()
-
-# Define the routes and views for the Flask app
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        user_input = request.form['user_input']
-        prompt = story_prompt + " " + user_input
-        response = generate_response(prompt)
-        return render_template('index.html', response=response)
-    return render_template('index.html')
+    if response.choices:
+        output = response.choices[0].text.strip()
+        return output
+    else:
+        print(f"OpenAI API error: {response}")
+        return ""
 
 # Start the conversation with the user
-print("Hello, I'm Tessa! How can I help you today? (Type 'start' to begin or 'quit' to exit)")
+print("Hello im Tessa! How can I help you today?")
 story_prompt = story + "\n\nAI Bot?:"
 
 while True:
@@ -54,7 +44,7 @@ while True:
     else:
         prompt = story_prompt + " " + user_input
         response = generate_response(prompt)
-        print("Tessa: " + response)
-
-if __name__ == '__main__':
-    app.run(host='172.20.10.13', port=5000, debug=True)
+        if response:
+            print("Tessa: " + response)
+        else:
+            print("Tessa: I'm sorry, I didn't understand. Can you please rephrase your question?")
