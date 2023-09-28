@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #iframe-container {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 30%;
+            height: 70%;
+        }
+
+        #iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #floating-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body><center>
+<h2>Logged as Support team member</h2><center>
+    <button id="floating-button" onclick="toggleIframe()">Ask Me Anything</button>
+
+    <div id="iframe-container">
+        <iframe src="https://app.customgpt.ai/projects/13985/ask-me-anything?shareable_slug=f0b8d6e741a4266afaf148f08e4842ea&embed=1"></iframe>
+    </div>
+
+    <script>
+        let iframeContainer = document.getElementById('iframe-container');
+
+        function toggleIframe() {
+            if (iframeContainer.style.display === 'none') {
+                iframeContainer.style.display = 'block';
+            } else {
+                iframeContainer.style.display = 'none';
+            }
+        }
+    </script>
+<p>Demo sample for development purpose page(27/09/2023</p>
+</body>
+</html>

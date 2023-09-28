@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+<body>
+    <h1>Login Page</h1>
+    <form id="loginForm" onsubmit="checkLogin(event)">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br>
+
+        <input type="submit" value="Login">
+    </form>
+
+    <script>
+        function checkLogin(event) {
+            event.preventDefault();
+
+            const userId = document.getElementById('userId').value;
+            const password = document.getElementById('password').value;
+
+            // Example user credentials with profile
+            const users = {
+                vishnu: { password: 'vishnu123', profile: 'sales' },
+                sakash: { password: 'sakash123', profile: 'support' },
+                karthick: { password: 'karthick123', profile: 'sales' }
+            };
+
+            const user = users[userId];
+
+            if (user && user.password === password) {
+                if (user.profile === 'sales') {
+                    window.location.href = 'login.html';
+                } else if (user.profile === 'support') {
+                    window.location.href = 'login2.html';
+                } else {
+                    alert('Unknown profile.');
+                }
+            } else {
+                alert('Invalid user ID or password.');
+            }
+        }
+    </script>
+</body>
+</html>
